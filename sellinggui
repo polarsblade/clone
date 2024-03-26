@@ -1,4 +1,4 @@
-warn("Clones Selling Gui Has Loaded (v.0.0.7)")
+warn("Clones Selling Gui Has Loaded (v.0.0.8)")
 
 --[[
 
@@ -809,16 +809,21 @@ function selling_gui.add_card(player : player) -- :)
     local set_amount = player_currency.Value
     local amount_checking = player_currency:GetPropertyChangedSignal("Value"):Connect(function()
         if begin_count then
+            warn("Counting!")
+
             if set_amount < player_currency.Value then
                 -- player has spent money
 
                 goal_amount -= set_amount - player_currency.Value
                 set_amount = player_currency.Value
+                warn("Player Has Spent Money!")
             elseif player_currency > (goal_amount + set_amount) then
                 -- player complete
                 uistroke.Color = Color3.fromRGB(0, 255, 0)
+                warn("Player Has Reached Goal!")
             end
         else
+            warn("Hasn't Started Counting!")
             set_amount = player_currency.Value
         end
 
@@ -847,11 +852,10 @@ function selling_gui.add_card(player : player) -- :)
             goal_amount = tonumber(cash_to_pickup.Text)
             cash_to_pickup.Text = "$"..format(tostring(goal_amount))
             goal.Text = "$"..format(tostring(goal_amount + set_amount))
+            begin_count = true
 
             if not goal_amount then
                 return warn("Failed To Set Goal Amount")
-            else
-                begin_count = true
             end
         end
     end)

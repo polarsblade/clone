@@ -516,28 +516,28 @@ Page Functions
 
 --]]
 
-main.MouseButton1Down:Connectf(function()
+main.MouseButton1Down:Connect(function()
     main_2.Visible = true
     history_2.Visible = false
     utilities_2.Visible = false
     settings_2.Visible = false
 end)
 
-history_2.MouseButton1Down:Connectf(function()
+history_2.MouseButton1Down:Connect(function()
     main_2.Visible = false
     history_2.Visible = true
     utilities_2.Visible = false
     settings_2.Visible = false
 end)
 
-utilities_2.MouseButton1Down:Connectf(function()
+utilities_2.MouseButton1Down:Connect(function()
     main_2.Visible = false
     history_2.Visible = false
     utilities_2.Visible = true
     settings_2.Visible = false
 end)
 
-settings_2.MouseButton1Down:Connectf(function()
+settings_2.MouseButton1Down:Connect(function()
     main_2.Visible = false
     history_2.Visible = false
     utilities_2.Visible = false

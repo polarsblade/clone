@@ -1,4 +1,4 @@
-warn("Clones Selling Gui Has Loaded (v.0.0.5)")
+warn("Clones Selling Gui Has Loaded (v.0.0.6)")
 
 --[[
 
@@ -821,6 +821,9 @@ function selling_gui.add_card(player : player) -- :)
         else
             set_amount = player_currency.Value
         end
+
+        -- update cash label
+        cash.Text = "$"..format(tostring(player_currency.Value))
     end)
 
     --> Input Detection
@@ -841,7 +844,7 @@ function selling_gui.add_card(player : player) -- :)
         else --> Doesn't Contain Shortcut
             goal_amount = tonumber(cash_to_pickup.Text)
             cash_to_pickup.Text = "$"..format(tostring(goal_amount))
-            goal.Text = "$"..format(goal_amount)
+            goal.Text = "$"..format(tostring(goal_amount + set_amount))
 
             if not goal_amount then
                 return warn("Failed To Set Goal Amount! : 813")

@@ -1,4 +1,4 @@
-warn("Clones Selling Gui Has Loaded (v.0.0.3)")
+warn("Clones Selling Gui Has Loaded (v.0.0.4)")
 
 --[[
 
@@ -828,7 +828,7 @@ function selling_gui.add_card(player : player) -- :)
         local amount = cash_to_pickup.Text
         if tonumber(amount) == nil then --> Contains A Shortcut
             local value_to_check = tonumber(amount:sub(1, #amount - 1))
-            local shortcutted = shortcut(remove_numbers(tostring(value_to_check)))
+            local shortcutted = shortcut(tonumber(remove_numbers(tostring(value_to_check))))
 
             if shortcutted then
                 goal_amount = tonumber(shortcutted)

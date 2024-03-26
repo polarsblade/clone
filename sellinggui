@@ -1,4 +1,4 @@
-warn("Clones Selling Gui Has Loaded (v.0.0.4)")
+warn("Clones Selling Gui Has Loaded (v.0.0.5)")
 
 --[[
 
@@ -572,13 +572,15 @@ local shortcut = remove_numbers(amount)
 --]]
 
 --> String Shortcuts
-local function shortcut(number)
+local function shortcut(number, shortcut)
     local number_amount = tonumber(number:sub(1, #number - 1))
-    if shortcut == "k" then
+    local shortcut_value = remove_numbers(tostring(number))
+
+    if shortcut_value == "k" then
         number_amount *= 1000
-    elseif shortcut == "m" then
+    elseif shortcut_value == "m" then
         number_amount *= 1000000
-    elseif shortcut == "b" then
+    elseif shortcut_value == "b" then
         number_amount *= 1000000000
     end
 
@@ -827,8 +829,7 @@ function selling_gui.add_card(player : player) -- :)
 
         local amount = cash_to_pickup.Text
         if tonumber(amount) == nil then --> Contains A Shortcut
-            local value_to_check = tonumber(amount:sub(1, #amount - 1))
-            local shortcutted = shortcut(tonumber(remove_numbers(tostring(value_to_check))))
+            local shortcutted = shortcut(amount)
 
             if shortcutted then
                 goal_amount = tonumber(shortcutted)

@@ -1,4 +1,5 @@
-warn("Clones Selling Gui Has Loaded (v.0.0.2)")
+warn("Clones Selling Gui Has Loaded (v.0.0.3)")
+
 --[[
 
 Load Gui
@@ -653,7 +654,7 @@ function selling_gui.add_card(player : player) -- :)
     
     local cash = Instance.new("TextLabel")
     cash.Font = Enum.Font.Gotham
-    cash.Text = format(tostring(player_currency.Value))
+    cash.Text = "$"..format(tostring(player_currency.Value))
     cash.TextColor3 = Color3.new(1, 1, 1)
     cash.TextScaled = true
     cash.TextSize = 14
@@ -827,10 +828,10 @@ function selling_gui.add_card(player : player) -- :)
         local amount = cash_to_pickup.Text
         if tonumber(amount) == nil then --> Contains A Shortcut
             local value_to_check = tonumber(amount:sub(1, #amount - 1))
-            local shortcut = remove_numbers(tostring(value_to_check))
+            local shortcutted = shortcut(remove_numbers(tostring(value_to_check)))
 
-            if shortcut then
-                goal_amount = tonumber(shortcut)
+            if shortcutted then
+                goal_amount = tonumber(shortcutted)
                 cash_to_pickup.Text = "$"..format(tostring(goal_amount))
                 goal.Text = "$"..format(goal_amount)
             else

@@ -4,6 +4,8 @@ Load Gui
 
 --]]
 
+warn("Clones Selling GUI Version 0.0.1")
+
 local clones_selling_gui = Instance.new("ScreenGui")
 clones_selling_gui.IgnoreGuiInset = false
 clones_selling_gui.ResetOnSpawn = true
@@ -523,21 +525,21 @@ main.MouseButton1Down:Connect(function()
     settings_2.Visible = false
 end)
 
-history_2.MouseButton1Down:Connect(function()
+history.MouseButton1Down:Connect(function()
     main_2.Visible = false
     history_2.Visible = true
     utilities_2.Visible = false
     settings_2.Visible = false
 end)
 
-utilities_2.MouseButton1Down:Connect(function()
+utilities.MouseButton1Down:Connect(function()
     main_2.Visible = false
     history_2.Visible = false
     utilities_2.Visible = true
     settings_2.Visible = false
 end)
 
-settings_2.MouseButton1Down:Connect(function()
+settings.MouseButton1Down:Connect(function()
     main_2.Visible = false
     history_2.Visible = false
     utilities_2.Visible = false

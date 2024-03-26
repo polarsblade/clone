@@ -1,4 +1,4 @@
-warn("Clones Selling Gui Has Loaded (v.0.0.6)")
+warn("Clones Selling Gui Has Loaded (v.0.0.7)")
 
 --[[
 
@@ -838,6 +838,8 @@ function selling_gui.add_card(player : player) -- :)
                 goal_amount = tonumber(shortcutted)
                 cash_to_pickup.Text = "$"..format(tostring(goal_amount))
                 goal.Text = "$"..format(goal_amount)
+
+                begin_count = true
             else
                 warn("A Error Has Occured When Setting Shortcut!")
             end
@@ -847,7 +849,9 @@ function selling_gui.add_card(player : player) -- :)
             goal.Text = "$"..format(tostring(goal_amount + set_amount))
 
             if not goal_amount then
-                return warn("Failed To Set Goal Amount! : 813")
+                return warn("Failed To Set Goal Amount")
+            else
+                begin_count = true
             end
         end
     end)

@@ -1,4 +1,4 @@
-warn("Clones Selling Gui Has Loaded (v.0.0.8)")
+warn("Clones Selling Gui Has Loaded (v.0.0.9)")
 
 --[[
 
@@ -811,11 +811,12 @@ function selling_gui.add_card(player : player) -- :)
         if begin_count then
             warn("Counting!")
 
-            if set_amount < player_currency.Value then
+            if set_amount > player_currency.Value then
                 -- player has spent money
 
                 goal_amount -= set_amount - player_currency.Value
                 set_amount = player_currency.Value
+                goal.Text = "$"..format(goal_amount)
                 warn("Player Has Spent Money!")
             elseif player_currency > (goal_amount + set_amount) then
                 -- player complete

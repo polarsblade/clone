@@ -653,7 +653,7 @@ function selling_gui.add_card(player : player) -- :)
     
     local cash = Instance.new("TextLabel")
     cash.Font = Enum.Font.Gotham
-    cash.Text = tostring(player_currency)
+    cash.Text = format(tostring(player_currency.Value))
     cash.TextColor3 = Color3.new(1, 1, 1)
     cash.TextScaled = true
     cash.TextSize = 14
@@ -667,7 +667,7 @@ function selling_gui.add_card(player : player) -- :)
     cash.Position = UDim2.new(0.306140333, 0, 0.676000834, 0)
     cash.Size = UDim2.new(0.271894187, 0, 0.271533221, 0)
     cash.Visible = true
-    cash.Name = " Cash"
+    cash.Name = "Cash"
     cash.Parent = card
     
     local uitext_size_constraint = Instance.new("UITextSizeConstraint")

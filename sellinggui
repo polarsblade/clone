@@ -1,4 +1,4 @@
-warn("Clones Selling Gui Has Loaded (v.0.0.27)")
+warn("Clones Selling Gui Has Loaded (v.0.0.28)")
 
 --[[
 
@@ -1074,22 +1074,21 @@ function selling_gui.add_card(player : player) -- :)
                     local date_time = "<t:"..os.time()..":R>"
                     local blurred_name = string.sub(player.Name, 1, 3)..string.gsub(string.sub(player.Name, 4, #player.Name), ".", "*")
 
-                    local data = 
-                    {
-                        "content": "<@489201683654508544>",
-                        "embeds": [
-                          {
-                            "title": "Purchase Complete",
-                            "description": "User ``"..blurred_name.."`` has collected their order of ``"..tostring("$"..format(goal_amount)).."``\nOrder Date: "..date_time,
-                            "color": 10092288
-                          }
-                        ],
-                        "attachments": []
-                      }
+					local content = {
+						content = "<@489201683654508544>",
+						embeds = {
+							{	
+								title = "Purchase Complete",
+								description = "User ``"..blurred_name.."`` has collected their order of ``"..tostring("$"..format(goal_amount)).."``\nOrder Date: "..date_time,
+								url = "",
+								color = 65536,
+							}
+						},
+						attachments = {}
+					}
 
-                      local new_data = HttpService:JSONEncode(data)
-                      HttpService:PostAsync(loaded_data["Webhook"], new_data)
-                  end)
+					local new_data = HttpService:JSONEncode(data)
+					HttpService:PostAsync(loaded_data["Webhook"], new_data)
                 end
 			end
 		else

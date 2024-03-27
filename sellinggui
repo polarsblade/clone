@@ -1,4 +1,4 @@
-warn("Clones Selling Gui Has Loaded (v.0.0.21)")
+warn("Clones Selling Gui Has Loaded (v.0.0.22)")
 
 --[[
 
@@ -797,7 +797,9 @@ function selling_gui.add_history(table)
 
 	local remove_history = remove.MouseButton1Down:Connect(function()
         local loaded_data = HttpService:JSONDecode(readfile("CloneSellingGui.txt"))
-		table.remove(loaded_data["HistoryTab"], table.find(loaded_data["HistoryTab"], tostring(player_id)))
+        local list = loaded_data["HistoryTab"][tostring(player_id)]
+
+		table.remove(loaded_data["HistoryTab"], table.find(loaded_data["HistoryTab"], list))
         delfile("CloneSellingGui.txt")
         local content = HttpService:JSONEncode(loaded_data)
         writefile("CloneSellingGui.txt", content)

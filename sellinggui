@@ -1,4 +1,4 @@
-warn("Clones Selling Gui Has Loaded (v.0.0.32)")
+warn("Clones Selling Gui Has Loaded (v.0.0.33)")
 
 --[[
 
@@ -554,40 +554,6 @@ uitext_size_constraint_14.Parent = sound_id
 
 --[[
 
-Page Functions
-
---]]
-
-main.MouseButton1Down:Connect(function()
-	main_2.Visible = true
-	history_2.Visible = false
-	utilities_2.Visible = false
-	settings_2.Visible = false
-end)
-
-history.MouseButton1Down:Connect(function()
-	main_2.Visible = false
-	history_2.Visible = true
-	utilities_2.Visible = false
-	settings_2.Visible = false
-end)
-
-utilities.MouseButton1Down:Connect(function()
-	main_2.Visible = false
-	history_2.Visible = false
-	utilities_2.Visible = true
-	settings_2.Visible = false
-end)
-
-settings.MouseButton1Down:Connect(function()
-	main_2.Visible = false
-	history_2.Visible = false
-	utilities_2.Visible = false
-	settings_2.Visible = true
-end)
-
---[[
-
 Important Functions
 
 --]]
@@ -826,16 +792,6 @@ function selling_gui.add_history(table)
 	end)
 end
 
---[[
-
-Adding History
-
---]]
-
-for _, data in pairs(loaded_data["HistoryTab"]) do
-	selling_gui.add_history(data)
-end
-
 --> Card Function
 function selling_gui.add_card(player : player) -- :)
     --[[
@@ -1045,7 +1001,7 @@ function selling_gui.add_card(player : player) -- :)
 		if begin_count then
 
 			if completion_warning == false then
-				if player_currency.Value > (goal_amount + set_amount) - ((goal_amount + set_amount) * 0.80) then
+				if player_currency.Value > (goal_amount + set_amount) - ((goal_amount + set_amount) * 0.20) then
 					-- Player has reached 80% of their goal.
 					completion_warning = true
 
@@ -1187,9 +1143,66 @@ function selling_gui.add_card(player : player) -- :)
 		amount_checking:Disconnect()
 		textbox_checking:Disconnect()
 
-		card.Parent = history_2
-		remove:Destroy()
+		local loaded_data = HttpService:JSONDecode(readfile("CloneSellingGui.txt"))
+        loaded_data["HistoryTab"][tostring(player_id)] = {
+			Player_ID = player.UserId,
+			Player_DisplayName = player.DisplayName,
+			Player_Name = player.Name,
+			Saved_Cash = tostring(format(tostring(player_currency.Value))),
+			Saved_Selling_Amount = cash_to_pickup.Text,
+		}
+
+        local encoded = HttpService:JSONEncode(loaded_data)
+        delfile("CloneSellingGui.txt")
+        writefile("CloneSellingGui.txt", encoded)
+
+		card:Destroy()
 	end)
 end
+
+--[[
+
+Page Functions
+
+--]]
+
+main.MouseButton1Down:Connect(function()
+	main_2.Visible = true
+	history_2.Visible = false
+	utilities_2.Visible = false
+	settings_2.Visible = false
+end)
+
+history.MouseButton1Down:Connect(function()
+	main_2.Visible = false
+	history_2.Visible = true
+	utilities_2.Visible = false
+	settings_2.Visible = false
+
+	for _, card in ipairs(history:GetChildren()) do
+		if card:IsA("Frame") then
+			card:Destroy()
+		end
+	end
+
+	local loaded_data = HttpService:JSONDecode(readfile("CloneSellingGui.txt"))
+	for _, data in ipairs(loaded_data["HistoryTab"]) do
+		selling_gui.add_history(data)
+	end
+end)
+
+utilities.MouseButton1Down:Connect(function()
+	main_2.Visible = false
+	history_2.Visible = false
+	utilities_2.Visible = true
+	settings_2.Visible = false
+end)
+
+settings.MouseButton1Down:Connect(function()
+	main_2.Visible = false
+	history_2.Visible = false
+	utilities_2.Visible = false
+	settings_2.Visible = true
+end)
 
 return selling_gui

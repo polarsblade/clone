@@ -1,4 +1,4 @@
-warn("Clones Selling Gui Has Loaded (v.1.0.47)")
+warn("Clones Selling Gui Has Loaded (v.1.0.48)")
 
 --[[
 
@@ -209,7 +209,6 @@ main_2.Size = UDim2.new(1.00095129, 0, 0.815051973, 0)
 main_2.Visible = false
 main_2.Name = "Main"
 main_2.Parent = canvas_group
-main_2.AutomaticCanvasSize = Enum.AutomaticSize.XY
 
 local uilist_layout = Instance.new("UIListLayout")
 uilist_layout.SortOrder = Enum.SortOrder.LayoutOrder
@@ -234,7 +233,6 @@ history_2.Size = UDim2.new(1.00095129, 0, 0.815051913, 0)
 history_2.Visible = false
 history_2.Name = "History"
 history_2.Parent = canvas_group
-history_2.AutomaticCanvasSize = Enum.AutomaticSize.XY
 
 local uilist_layout_2 = Instance.new("UIListLayout")
 uilist_layout_2.SortOrder = Enum.SortOrder.LayoutOrder

@@ -1,4 +1,4 @@
-warn("Clones Selling Gui Has Loaded (v.0.0.23)")
+warn("Clones Selling Gui Has Loaded (v.0.0.24)")
 
 --[[
 
@@ -389,7 +389,13 @@ local webhook_3 = Instance.new("TextBox")
 webhook_3.CursorPosition = -1
 webhook_3.Font = Enum.Font.Gotham
 webhook_3.PlaceholderText = "Webhook Link"
-webhook_3.Text = ""
+
+if loaded_data["Webhook"] ~= nil then
+    webhook_3.Text = loaded_data["Webhook"]
+else
+    webhook_3.Text = ""
+end
+
 webhook_3.TextColor3 = Color3.new(1, 1, 1)
 webhook_3.TextSize = 14
 webhook_3.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -468,29 +474,29 @@ webhook_configurations.Visible = true
 webhook_configurations.Name = "WebhookConfigurations"
 webhook_configurations.Parent = utilities_2
 
-local webhook_completion_2 = Instance.new("TextButton")
-webhook_completion_2.Font = Enum.Font.Gotham
-webhook_completion_2.Text = "Save Settings"
-webhook_completion_2.TextColor3 = Color3.new(1, 1, 1)
-webhook_completion_2.TextScaled = true
-webhook_completion_2.TextSize = 14
-webhook_completion_2.TextWrapped = true
-webhook_completion_2.AnchorPoint = Vector2.new(0.5, 0.5)
-webhook_completion_2.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.0941176)
-webhook_completion_2.BorderColor3 = Color3.new(0, 0, 0)
-webhook_completion_2.BorderSizePixel = 0
-webhook_completion_2.Position = UDim2.new(0.737990081, 0, 0.694199681, 0)
-webhook_completion_2.Size = UDim2.new(0.47502932, 0, 0.398391902, 0)
-webhook_completion_2.Visible = true
-webhook_completion_2.Name = "WebhookCompletion"
-webhook_completion_2.Parent = webhook_configurations
+local save_settings = Instance.new("TextButton")
+save_settings.Font = Enum.Font.Gotham
+save_settings.Text = "Save Settings"
+save_settings.TextColor3 = Color3.new(1, 1, 1)
+save_settings.TextScaled = true
+save_settings.TextSize = 14
+save_settings.TextWrapped = true
+save_settings.AnchorPoint = Vector2.new(0.5, 0.5)
+save_settings.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.0941176)
+save_settings.BorderColor3 = Color3.new(0, 0, 0)
+save_settings.BorderSizePixel = 0
+save_settings.Position = UDim2.new(0.737990081, 0, 0.694199681, 0)
+save_settings.Size = UDim2.new(0.47502932, 0, 0.398391902, 0)
+save_settings.Visible = true
+save_settings.Name = "WebhookCompletion"
+save_settings.Parent = webhook_configurations
 
 local uicorner_8 = Instance.new("UICorner")
-uicorner_8.Parent = webhook_completion_2
+uicorner_8.Parent = save_settings
 
 local uitext_size_constraint_12 = Instance.new("UITextSizeConstraint")
 uitext_size_constraint_12.MaxTextSize = 12
-uitext_size_constraint_12.Parent = webhook_completion_2
+uitext_size_constraint_12.Parent = save_settings
 
 local sound_completion = Instance.new("TextButton")
 sound_completion.Font = Enum.Font.Gotham
@@ -520,6 +526,13 @@ local sound_id = Instance.new("TextBox")
 sound_id.CursorPosition = -1
 sound_id.Font = Enum.Font.Gotham
 sound_id.PlaceholderText = "Sound ID"
+
+if loaded_data["SoundID"] ~= nil then
+    sound_id.Text = loaded_data["SoundID"]
+else
+    sound_id.Text = ""
+end
+
 sound_id.Text = ""
 sound_id.TextColor3 = Color3.new(1, 1, 1)
 sound_id.TextSize = 14
@@ -579,6 +592,21 @@ end)
 Important Functions
 
 --]]
+
+--> Webhook Saving
+save_settings.MouseButton1Down:Connect(function()
+    warn("Saving Webhook To: "..webhook_3.Text)
+    warn("Saving SoundID To: "..sound_id.Text)
+
+    loaded_data["Webhook"].Value = webhook_3.Text
+    loaded_data["SoundID"].Value = sound_id.Text
+    local encoded = HttpService:JSONEncode(loaded_data)
+
+    delfile("CloneSellingGui.txt")
+    writefile("CloneSellingGui.txt", encoded)
+
+    local loaded_data = HttpService:JSONDecode(readfile("CloneSellingGui.txt"))
+end)
 
 --> Number Formatter
 local function format(number)

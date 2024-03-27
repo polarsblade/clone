@@ -1,4 +1,4 @@
-warn("Clones Selling Gui Has Loaded (v.0.0.35)")
+warn("Clones Selling Gui Has Loaded (v.0.0.36)")
 
 --[[
 
@@ -1185,16 +1185,11 @@ history.MouseButton1Down:Connect(function()
 		end
 	end
 
-	print("deleted all cards")
-
+	local HttpService = game:GetService("HttpService")
 	local loaded_data = HttpService:JSONDecode(readfile("CloneSellingGui.txt"))
-	for _, data in ipairs(loaded_data["HistoryTab"]) do
+	for _, data in pairs(loaded_data["HistoryTab"]) do
 		selling_gui.add_history(data)
-
-		print("history added")
 	end
-
-	print("added all history")
 end)
 
 utilities.MouseButton1Down:Connect(function()

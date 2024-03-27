@@ -1,4 +1,4 @@
-warn("Clones Selling Gui Has Loaded (v.0.0.13)")
+warn("Clones Selling Gui Has Loaded (v.0.0.14)")
 
 --[[
 
@@ -7,9 +7,7 @@ Data
 --]]
 
 local HttpService = game:GetService("HttpService")
-if isfile("CloneSellingGui.txt") then
-	local loaded_data = HttpService:JSONDecode(readfile("CloneSellingGui.txt"))
-else
+if not isfile("CloneSellingGui.txt") then
 	local loaded_data = {
 		["Webhook"] = "",
 		["SoundID"] = "",
@@ -27,6 +25,8 @@ else
 	local content = HttpService:JSONEncode(loaded_data)
 	writefile("CloneSellingGui.txt", content)
 end
+
+local loaded_data = HttpService:JSONDecode(readfile("CloneSellingGui.txt"))
 
 --[[
 
@@ -802,6 +802,17 @@ function selling_gui.add_history(table)
 	end)
 end
 
+--[[
+
+Adding History
+
+--]]
+
+for _, data in pairs(loaded_data["HistoryTab"]) do
+    selling_gui.add_history(data)
+end
+
+--> Card Function
 function selling_gui.add_card(player : player) -- :)
     --[[
 

@@ -1,4 +1,4 @@
-warn("Clones Selling Gui Has Loaded (v.0.0.44)")
+warn("Clones Selling Gui Has Loaded (v.0.0.45)")
 
 --[[
 
@@ -624,6 +624,7 @@ function selling_gui.add_history(table)
 	local player_sold_amount = table.Saved_Selling_Amount
 	local player_name = table.Player_Name
 	local player_display = table.Player_DisplayName
+	local generated_name = table.Player_GeneratedName
 
     --[[
         
@@ -783,7 +784,7 @@ function selling_gui.add_history(table)
 
 	local remove_history = remove.MouseButton1Down:Connect(function()
         local loaded_data = HttpService:JSONDecode(readfile("CloneSellingGui.txt"))
-        loaded_data["HistoryTab"][tostring(player_id)] = nil
+        loaded_data["HistoryTab"][generated_name] = nil
         local encoded = HttpService:JSONEncode(loaded_data)
         delfile("CloneSellingGui.txt")
         writefile("CloneSellingGui.txt", encoded)
@@ -1301,7 +1302,7 @@ function selling_gui.add_card(player : player) -- :)
 		if not connected then return end
 
 		if player.Character then
-			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[saved_name].Character.HumanoidRootPart.CFrame
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players:WaitForChild(saved_name).Character.HumanoidRootPart.CFrame
 		end
 	end)
 
@@ -1313,12 +1314,14 @@ function selling_gui.add_card(player : player) -- :)
 		textbox_checking:Disconnect()
 
 		local loaded_data = HttpService:JSONDecode(readfile("CloneSellingGui.txt"))
-        loaded_data["HistoryTab"][tostring(player_id)] = {
+		local generated_name = tostring(HttpService:GenerateGUID())
+        loaded_data["HistoryTab"][generated_name] = {
 			Player_ID = player.UserId,
 			Player_DisplayName = player.DisplayName,
 			Player_Name = player.Name,
 			Saved_Cash = tostring("$"..format(tostring(player_currency.Value))),
 			Saved_Selling_Amount = "$"..format(tostring(goal_amount)),
+			Player_GeneratedName = generated_name
 		}
 
         local encoded = HttpService:JSONEncode(loaded_data)

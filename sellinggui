@@ -1,4 +1,4 @@
-warn("Clones Selling Gui Has Loaded (v.0.0.38)")
+warn("Clones Selling Gui Has Loaded (v.0.0.39)")
 
 --[[
 
@@ -997,7 +997,7 @@ function selling_gui.add_card(player : player) -- :)
 	local connected = true
 
 	--> Player_Checks
-	game.Players.PlayerAdded:Connect(function(plr)
+	game.Players.PlayerConnecting:Connect(function(plr)
 		if plr == player then
 			connected = true
 			uistroke.Color = Color3.new(1, 0.341176, 0.341176)

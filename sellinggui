@@ -1,4 +1,4 @@
-warn("Clones Selling Gui Has Loaded (v.0.0.33)")
+warn("Clones Selling Gui Has Loaded (v.0.0.34)")
 
 --[[
 
@@ -1148,8 +1148,8 @@ function selling_gui.add_card(player : player) -- :)
 			Player_ID = player.UserId,
 			Player_DisplayName = player.DisplayName,
 			Player_Name = player.Name,
-			Saved_Cash = tostring(format(tostring(player_currency.Value))),
-			Saved_Selling_Amount = cash_to_pickup.Text,
+			Saved_Cash = tostring("$"..format(tostring(player_currency.Value))),
+			Saved_Selling_Amount = "$"..format(tostring(goal_amount)),
 		}
 
         local encoded = HttpService:JSONEncode(loaded_data)
@@ -1179,7 +1179,7 @@ history.MouseButton1Down:Connect(function()
 	utilities_2.Visible = false
 	settings_2.Visible = false
 
-	for _, card in ipairs(history:GetChildren()) do
+	for _, card in ipairs(history_2:GetChildren()) do
 		if card:IsA("Frame") then
 			card:Destroy()
 		end

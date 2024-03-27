@@ -1,4 +1,4 @@
-warn("Clones Selling Gui Has Loaded (v.0.0.16)")
+warn("Clones Selling Gui Has Loaded (v.0.0.17)")
 
 --[[
 
@@ -14,7 +14,7 @@ if not isfile("CloneSellingGui.txt") then
 		["HistoryTab"] = {
 			["31598955"] = {
 				Player_ID = 31598955,
-                Player_DisplayName = "Polar"
+				Player_DisplayName = "Polar",
 				Player_Name = "PolarsBlade",
 				Saved_Cash = "$5,000,000",
 				Saved_Selling_Amount = "$5,000,000",
@@ -638,7 +638,7 @@ function selling_gui.add_history(table)
 	local player_currency = table.Saved_Cash
 	local player_sold_amount = table.Saved_Selling_Amount
 	local player_name = table.Player_Name
-    local player_display = table.Player_DisplayName
+	local player_display = table.Player_DisplayName
 
     --[[
         
@@ -809,7 +809,7 @@ Adding History
 --]]
 
 for _, data in pairs(loaded_data["HistoryTab"]) do
-    selling_gui.add_history(data)
+	selling_gui.add_history(data)
 end
 
 --> Card Function

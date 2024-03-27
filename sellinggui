@@ -1,4 +1,4 @@
-warn("Clones Selling Gui Has Loaded (v.0.0.30)")
+warn("Clones Selling Gui Has Loaded (v.0.0.31)")
 
 --[[
 
@@ -618,14 +618,6 @@ local function remove_numbers(x)
 	return ({x:gsub("%d", "")})[1]
 end
 
---[[
-reference, ignore
-
-local amount = "41.5m"
-local number_amount = tonumber(amount:sub(1, #amount - 1))
-local shortcut = remove_numbers(amount)
---]]
-
 --> String Shortcuts
 local function shortcut(number, shortcut)
 	local number_amount = tonumber(number:sub(1, #number - 1))
@@ -672,6 +664,7 @@ function selling_gui.add_history(table)
         Card
 
     --]]
+
 	local card = Instance.new("Frame")
 	card.AnchorPoint = Vector2.new(0.5, 0.5)
 	card.BackgroundColor3 = Color3.new(0.113725, 0.113725, 0.113725)
@@ -860,6 +853,7 @@ function selling_gui.add_card(player : player) -- :)
         Card
 
     --]]
+
 	local card = Instance.new("Frame")
 	card.AnchorPoint = Vector2.new(0.5, 0.5)
 	card.BackgroundColor3 = Color3.new(0.113725, 0.113725, 0.113725)
@@ -1043,11 +1037,56 @@ function selling_gui.add_card(player : player) -- :)
 	--> Important
 	local begin_count = false
 	local goal_amount = nil
+	local completion_warning = false
 
 	--> Amount Checking
 	local set_amount = player_currency.Value
 	local amount_checking = player_currency:GetPropertyChangedSignal("Value"):Connect(function()
 		if begin_count then
+
+			if completion_warning == false then
+				if player_currency.Value > (goal_amount + set_amount) - ((goal_amount + set_amount) * 0.80) then
+					-- Player has reached 80% of their goal.
+
+					if loaded_data["SoundID"] ~= nil then
+						local sound = Instance.new("Sound")
+						sound.SoundId = "rbxassetid://136075117"
+						sound.PlayOnRemove = true
+						sound.Parent = workspace
+						sound:Destroy()
+					end
+
+					if loaded_data["Webhook"] ~= nil then
+						local request = http_request or httprequest or error("Webhook API: Failed to find HTTP request function");
+						local date_time = "<t:"..os.time()..":R>"
+						local blurred_name = string.sub(player.Name, 1, 3)..string.gsub(string.sub(player.Name, 4, #player.Name), ".", "*")
+	
+						local content = {
+							content = "<@489201683654508544>",
+							embeds = {
+								{	
+									title = "Purchase Near Complete",
+									description = "User ``"..blurred_name.."`` has collected 80% of their order of ``"..tostring("$"..format(goal_amount)).."``\nOrder Warning: "..date_time,
+									url = "",
+									color = 16776960,
+								}
+							},
+							attachments = {}
+						}
+	
+						local response = request(
+							{
+								Url = loaded_data["Webhook"],
+								Method = "POST",
+								Headers = {
+									["Content-Type"] = "application/json"
+								},
+								Body = HttpService:JSONEncode(content)
+							}
+						)
+					end
+				end
+			end
 
 			if set_amount > player_currency.Value then
 				-- player has spent money

@@ -1,4 +1,4 @@
-warn("Clones Selling Gui Has Loaded (v.0.0.36)")
+warn("Clones Selling Gui Has Loaded (v.0.0.37)")
 
 --[[
 
@@ -994,10 +994,32 @@ function selling_gui.add_card(player : player) -- :)
 	local begin_count = false
 	local goal_amount = nil
 	local completion_warning = false
+	local connected = true
+
+	--> Player_Checks
+	game.Players.PlayerAdded:Connect(function(plr)
+		if plr == player then
+			connected = true
+			uistroke.Color = Color3.new(1, 0.341176, 0.341176)
+
+			player_id = plr.UserId
+			player_datafolder = plr:WaitForChild("DataFolder")
+			player_currency = player_datafolder:WaitForChild("Currency")
+		end
+	end)
+
+	game.Players.PlayerDisconnecting:Connect(function(plr)
+		if plr == player then
+			connected = false
+			uistroke.Color = Color3.new(0.572549, 0.341176, 1)
+		end
+	end)
 
 	--> Amount Checking
 	local set_amount = player_currency.Value
 	local amount_checking = player_currency:GetPropertyChangedSignal("Value"):Connect(function()
+		if not connected then return end
+
 		if begin_count then
 
 			if completion_warning == false then
@@ -1104,6 +1126,8 @@ function selling_gui.add_card(player : player) -- :)
 
 	--> Input Detection
 	local textbox_checking = cash_to_pickup.FocusLost:Connect(function()
+		if not connected then return end
+
 		-- Amount Has Been Set (Checking)
 
 		local amount = cash_to_pickup.Text
@@ -1133,6 +1157,8 @@ function selling_gui.add_card(player : player) -- :)
 
 	--> Teleport
 	local teleport_card = teleport.MouseButton1Down:Connect(function()
+		if not connected then return end
+
 		if player.Character then
 			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = player.Character.HumanoidRootPart.CFrame
 		end
@@ -1140,6 +1166,8 @@ function selling_gui.add_card(player : player) -- :)
 
 	--> Remove Card
 	local remove_card = remove.MouseButton1Down:Connect(function()
+		if not connected then return end
+
 		amount_checking:Disconnect()
 		textbox_checking:Disconnect()
 

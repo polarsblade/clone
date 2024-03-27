@@ -1,4 +1,4 @@
-warn("Clones Selling Gui Has Loaded (v.0.0.24)")
+warn("Clones Selling Gui Has Loaded (v.0.0.25)")
 
 --[[
 
@@ -598,8 +598,8 @@ save_settings.MouseButton1Down:Connect(function()
     warn("Saving Webhook To: "..webhook_3.Text)
     warn("Saving SoundID To: "..sound_id.Text)
 
-    loaded_data["Webhook"].Value = webhook_3.Text
-    loaded_data["SoundID"].Value = sound_id.Text
+    loaded_data["Webhook"] = webhook_3.Text
+    loaded_data["SoundID"] = sound_id.Text
     local encoded = HttpService:JSONEncode(loaded_data)
 
     delfile("CloneSellingGui.txt")

@@ -1,4 +1,4 @@
-warn("Clones Selling Gui Has Loaded (v.0.0.14)")
+warn("Clones Selling Gui Has Loaded (v.0.0.15)")
 
 --[[
 
@@ -653,7 +653,7 @@ function selling_gui.add_history(table)
 	card.Position = UDim2.new(0.49999997, 0, 0.053178601, 0)
 	card.Size = UDim2.new(0.99999994, 0, 0.106357202, 0)
 	card.Visible = true
-	card.Name = player.Name
+	card.Name = player_name
 	card.Parent = history_2
 
 	local player_icon = Instance.new("ImageLabel")
@@ -667,7 +667,7 @@ function selling_gui.add_history(table)
 	player_icon.Position = UDim2.new(0.0843881518, 0, 0.497655749, 0)
 	player_icon.Size = UDim2.new(0.105989054, 0, 0.626111567, 0)
 	player_icon.Visible = true
-	player_icon.Name = player.UserId
+	player_icon.Name = "History"
 	player_icon.Parent = card
 
 	local uicorner = Instance.new("UICorner")

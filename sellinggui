@@ -1,4 +1,4 @@
-warn("Clones Selling Gui Has Loaded (v.0.0.31)")
+warn("Clones Selling Gui Has Loaded (v.0.0.32)")
 
 --[[
 
@@ -1047,6 +1047,7 @@ function selling_gui.add_card(player : player) -- :)
 			if completion_warning == false then
 				if player_currency.Value > (goal_amount + set_amount) - ((goal_amount + set_amount) * 0.80) then
 					-- Player has reached 80% of their goal.
+					completion_warning = true
 
 					if loaded_data["SoundID"] ~= nil then
 						local sound = Instance.new("Sound")

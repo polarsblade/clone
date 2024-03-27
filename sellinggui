@@ -1,4 +1,4 @@
-warn("Clones Selling Gui Has Loaded (v.0.0.43)")
+warn("Clones Selling Gui Has Loaded (v.0.0.44)")
 
 --[[
 
@@ -1155,6 +1155,144 @@ function selling_gui.add_card(player : player) -- :)
 		if plr == player then
 			connected = false
 			uistroke.Color = Color3.new(0.572549, 0.341176, 1)
+		end
+	end)
+
+	local amount_checking = player_currency:GetPropertyChangedSignal("Value"):Connect(function()
+		if not connected then return end
+
+		if begin_count then
+
+			if completion_warning == false then
+				if player_currency.Value > (goal_amount + set_amount) - ((goal_amount + set_amount) * 0.20) then
+					-- Player has reached 80% of their goal.
+					completion_warning = true
+
+					if loaded_data["SoundID"] ~= nil then
+						local sound = Instance.new("Sound")
+						sound.SoundId = "rbxassetid://136075117"
+						sound.PlayOnRemove = true
+						sound.Parent = workspace
+						sound:Destroy()
+					end
+
+					if loaded_data["Webhook"] ~= nil then
+						local request = http_request or httprequest or error("Webhook API: Failed to find HTTP request function");
+						local date_time = "<t:"..os.time()..":R>"
+						local blurred_name = string.sub(player.Name, 1, 3)..string.gsub(string.sub(player.Name, 4, #player.Name), ".", "*")
+	
+						local content = {
+							content = "<@489201683654508544>",
+							embeds = {
+								{	
+									title = "Purchase Near Complete",
+									description = "User ``"..blurred_name.."`` has collected 80% of their order of ``"..tostring("$"..format(goal_amount)).."``\nOrder Warning: "..date_time,
+									url = "",
+									color = 16776960,
+								}
+							},
+							attachments = {}
+						}
+	
+						local response = request(
+							{
+								Url = loaded_data["Webhook"],
+								Method = "POST",
+								Headers = {
+									["Content-Type"] = "application/json"
+								},
+								Body = HttpService:JSONEncode(content)
+							}
+						)
+					end
+				end
+			end
+
+			if set_amount > player_currency.Value then
+				-- player has spent money
+
+				goal_amount -= set_amount - player_currency.Value
+				set_amount = player_currency.Value
+				goal.Text = "$"..format(goal_amount)
+			elseif player_currency.Value > (goal_amount + set_amount) then
+				-- player complete
+                begin_count = false
+				uistroke.Color = Color3.fromRGB(0, 255, 0)
+
+                if loaded_data["SoundID"] ~= nil then
+                    local sound = Instance.new("Sound")
+                    sound.SoundId = loaded_data["SoundID"]
+                    sound.PlayOnRemove = true
+                    sound.Parent = workspace
+                    sound:Destroy()
+                end
+
+                if loaded_data["Webhook"] ~= nil then
+                    local request = http_request or httprequest or error("Webhook API: Failed to find HTTP request function");
+                    local date_time = "<t:"..os.time()..":R>"
+                    local blurred_name = string.sub(player.Name, 1, 3)..string.gsub(string.sub(player.Name, 4, #player.Name), ".", "*")
+
+					local content = {
+						content = "<@489201683654508544>",
+						embeds = {
+							{	
+								title = "Purchase Complete",
+								description = "User ``"..blurred_name.."`` has collected their order of ``"..tostring("$"..format(goal_amount)).."``\nOrder Date: "..date_time,
+								url = "",
+								color = 50000,
+							}
+						},
+						attachments = {}
+					}
+
+                    local response = request(
+                        {
+                            Url = loaded_data["Webhook"],
+                            Method = "POST",
+                            Headers = {
+                                ["Content-Type"] = "application/json"
+                            },
+                            Body = HttpService:JSONEncode(content)
+                        }
+                    )
+                end
+			end
+		else
+			set_amount = player_currency.Value
+		end
+
+		-- update cash label
+		cash.Text = "$"..format(tostring(player_currency.Value))
+	end)
+
+	--> Input Detection
+	local textbox_checking = cash_to_pickup.FocusLost:Connect(function()
+		if not connected then return end
+
+		-- Amount Has Been Set (Checking)
+
+		local amount = cash_to_pickup.Text
+		if tonumber(amount) == nil then --> Contains A Shortcut
+			local shortcutted = shortcut(amount)
+
+			if shortcutted then
+				goal_amount = tonumber(shortcutted)
+				cash_to_pickup.Text = "$"..format(tostring(goal_amount))
+				goal.Text = "$"..format(goal_amount)
+
+				begin_count = true
+			else
+				warn("A Error Has Occured When Setting Shortcut!")
+			end
+		else --> Doesn't Contain Shortcut
+			goal_amount = tonumber(cash_to_pickup.Text)
+			cash_to_pickup.Text = "$"..format(tostring(goal_amount))
+			goal.Text = "$"..format(tostring(goal_amount + set_amount))
+			begin_count = true
+
+			if not goal_amount then
+				return warn("Failed To Set Goal Amount")
+			end
 		end
 	end)
 

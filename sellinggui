@@ -1,4 +1,4 @@
-warn("Clones Selling Gui Has Loaded (v.0.0.15)")
+warn("Clones Selling Gui Has Loaded (v.0.0.16)")
 
 --[[
 
@@ -14,8 +14,8 @@ if not isfile("CloneSellingGui.txt") then
 		["HistoryTab"] = {
 			["31598955"] = {
 				Player_ID = 31598955,
+                Player_DisplayName = "Polar"
 				Player_Name = "PolarsBlade",
-				Player_Image = "https://www.roblox.com/bust-thumbnail/image?userId="..tostring(Player_ID).."&width=420&height=420&format=png",
 				Saved_Cash = "$5,000,000",
 				Saved_Selling_Amount = "$5,000,000",
 			},
@@ -637,8 +637,8 @@ function selling_gui.add_history(table)
 	local player_id = table.Player_ID
 	local player_currency = table.Saved_Cash
 	local player_sold_amount = table.Saved_Selling_Amount
-	local player_image = table.Player_Image
 	local player_name = table.Player_Name
+    local player_display = table.Player_DisplayName
 
     --[[
         
@@ -657,7 +657,7 @@ function selling_gui.add_history(table)
 	card.Parent = history_2
 
 	local player_icon = Instance.new("ImageLabel")
-	player_icon.Image = player_image
+	player_icon.Image = "https://www.roblox.com/bust-thumbnail/image?userId="..tostring(player_id).."&width=420&height=420&format=png"
 	player_icon.ImageColor3 = Color3.new(255, 255, 255)
 	player_icon.AnchorPoint = Vector2.new(0.5, 0.5)
 	player_icon.BackgroundColor3 = Color3.new(1, 1, 1)
@@ -703,7 +703,7 @@ function selling_gui.add_history(table)
 
 	local goal = Instance.new("TextLabel")
 	goal.Font = Enum.Font.Gotham
-	goal.Text = "$0"
+	goal.Text = player_sold_amount
 	goal.TextColor3 = Color3.new(1, 1, 1)
 	goal.TextScaled = true
 	goal.TextSize = 14
@@ -750,7 +750,7 @@ function selling_gui.add_history(table)
 
 	local username = Instance.new("TextLabel")
 	username.Font = Enum.Font.GothamBold
-	username.Text = player_name
+	username.Text = player_name.." ("..player_display..")"
 	username.TextColor3 = Color3.new(1, 1, 1)
 	username.TextScaled = true
 	username.TextSize = 14

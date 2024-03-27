@@ -1,4 +1,4 @@
-warn("Clones Selling Gui Has Loaded (v.1.0.48)")
+warn("Clones Selling Gui Has Loaded (v.1.0.50)")
 
 --[[
 
@@ -300,6 +300,7 @@ local uitext_size_constraint_6 = Instance.new("UITextSizeConstraint")
 uitext_size_constraint_6.MaxTextSize = 12
 uitext_size_constraint_6.Parent = unload
 
+--[[
 local reload = Instance.new("TextButton")
 reload.Font = Enum.Font.Gotham
 reload.Text = "Reload Script"
@@ -341,12 +342,14 @@ wipe_history.Visible = true
 wipe_history.Name = "WipeHistory"
 wipe_history.Parent = webhook
 
+
 local uicorner_4 = Instance.new("UICorner")
 uicorner_4.Parent = wipe_history
 
 local uitext_size_constraint_8 = Instance.new("UITextSizeConstraint")
 uitext_size_constraint_8.MaxTextSize = 12
 uitext_size_constraint_8.Parent = wipe_history
+--]]
 
 local utilities_2 = Instance.new("ScrollingFrame")
 utilities_2.ScrollBarImageColor3 = Color3.new(0, 0, 0)

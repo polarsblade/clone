@@ -547,31 +547,31 @@ Page Functions
 --]]
 
 main.MouseButton1Down:Connect(function()
-    main_2.Visible = true
-    history_2.Visible = false
-    utilities_2.Visible = false
-    settings_2.Visible = false
+	main_2.Visible = true
+	history_2.Visible = false
+	utilities_2.Visible = false
+	settings_2.Visible = false
 end)
 
 history.MouseButton1Down:Connect(function()
-    main_2.Visible = false
-    history_2.Visible = true
-    utilities_2.Visible = false
-    settings_2.Visible = false
+	main_2.Visible = false
+	history_2.Visible = true
+	utilities_2.Visible = false
+	settings_2.Visible = false
 end)
 
 utilities.MouseButton1Down:Connect(function()
-    main_2.Visible = false
-    history_2.Visible = false
-    utilities_2.Visible = true
-    settings_2.Visible = false
+	main_2.Visible = false
+	history_2.Visible = false
+	utilities_2.Visible = true
+	settings_2.Visible = false
 end)
 
 settings.MouseButton1Down:Connect(function()
-    main_2.Visible = false
-    history_2.Visible = false
-    utilities_2.Visible = false
-    settings_2.Visible = true
+	main_2.Visible = false
+	history_2.Visible = false
+	utilities_2.Visible = false
+	settings_2.Visible = true
 end)
 
 --[[
@@ -582,8 +582,8 @@ Important Functions
 
 --> Number Formatter
 local function format(number)
-    number = tostring(number)
-    return number:reverse():gsub("...","%0,",math.floor((#number-1)/3)):reverse()
+	number = tostring(number)
+	return number:reverse():gsub("...","%0,",math.floor((#number-1)/3)):reverse()
 end
 
 --> Remove Numbers
@@ -601,18 +601,18 @@ local shortcut = remove_numbers(amount)
 
 --> String Shortcuts
 local function shortcut(number, shortcut)
-    local number_amount = tonumber(number:sub(1, #number - 1))
-    local shortcut_value = remove_numbers(tostring(number))
+	local number_amount = tonumber(number:sub(1, #number - 1))
+	local shortcut_value = remove_numbers(tostring(number))
 
-    if shortcut_value == "k" then
-        number_amount *= 1000
-    elseif shortcut_value == "m" then
-        number_amount *= 1000000
-    elseif shortcut_value == "b" then
-        number_amount *= 1000000000
-    end
+	if shortcut_value == "k" then
+		number_amount *= 1000
+	elseif shortcut_value == "m" then
+		number_amount *= 1000000
+	elseif shortcut_value == "b" then
+		number_amount *= 1000000000
+	end
 
-    return number_amount
+	return number_amount
 end
 
 --> Drag
@@ -622,7 +622,7 @@ canvas_group.Selectable = true
 
 --> Unload
 unload.MouseButton1Down:Connect(function()
-    canvas_group:Destroy()
+	canvas_group:Destroy()
 end)
 
 --[[ 
@@ -634,172 +634,172 @@ Library
 local selling_gui = {}
 
 function selling_gui.add_history(table)
-    local player_id = table.Player_ID
-    local player_currency = table.Saved_Cash
-    local player_sold_amount = table.Saved_Selling_Amount
-    local player_image = table.Player_Image
-    local player_name = table.Player_Name
+	local player_id = table.Player_ID
+	local player_currency = table.Saved_Cash
+	local player_sold_amount = table.Saved_Selling_Amount
+	local player_image = table.Player_Image
+	local player_name = table.Player_Name
 
     --[[
         
         Card
 
     --]]
-    local card = Instance.new("Frame")
-    card.AnchorPoint = Vector2.new(0.5, 0.5)
-    card.BackgroundColor3 = Color3.new(0.113725, 0.113725, 0.113725)
-    card.BorderColor3 = Color3.new(0, 0, 0)
-    card.BorderSizePixel = 0
-    card.Position = UDim2.new(0.49999997, 0, 0.053178601, 0)
-    card.Size = UDim2.new(0.99999994, 0, 0.106357202, 0)
-    card.Visible = true
-    card.Name = player.Name
-    card.Parent = history_2
-    
-    local player_icon = Instance.new("ImageLabel")
-    player_icon.Image = player_image
-    player_icon.ImageColor3 = Color3.new(255, 255, 255)
-    player_icon.AnchorPoint = Vector2.new(0.5, 0.5)
-    player_icon.BackgroundColor3 = Color3.new(1, 1, 1)
-    player_icon.BackgroundTransparency = 1
-    player_icon.BorderColor3 = Color3.new(0, 0, 0)
-    player_icon.BorderSizePixel = 0
-    player_icon.Position = UDim2.new(0.0843881518, 0, 0.497655749, 0)
-    player_icon.Size = UDim2.new(0.105989054, 0, 0.626111567, 0)
-    player_icon.Visible = true
-    player_icon.Name = player.UserId
-    player_icon.Parent = card
-    
-    local uicorner = Instance.new("UICorner")
-    uicorner.Parent = player_icon
-    
-    local uistroke = Instance.new("UIStroke")
-    uistroke.Color = Color3.new(1, 0.341176, 0.341176)
-    uistroke.Thickness = 2
-    uistroke.Parent = player_icon
-    
-    local cash = Instance.new("TextLabel")
-    cash.Font = Enum.Font.Gotham
-    cash.Text = player_currency
-    cash.TextColor3 = Color3.new(1, 1, 1)
-    cash.TextScaled = true
-    cash.TextSize = 14
-    cash.TextWrapped = true
-    cash.TextXAlignment = Enum.TextXAlignment.Left
-    cash.AnchorPoint = Vector2.new(0.5, 0.5)
-    cash.BackgroundColor3 = Color3.new(1, 1, 1)
-    cash.BackgroundTransparency = 1
-    cash.BorderColor3 = Color3.new(0, 0, 0)
-    cash.BorderSizePixel = 0
-    cash.Position = UDim2.new(0.306140333, 0, 0.676000834, 0)
-    cash.Size = UDim2.new(0.271894187, 0, 0.271533221, 0)
-    cash.Visible = true
-    cash.Name = "Cash"
-    cash.Parent = card
-    
-    local uitext_size_constraint = Instance.new("UITextSizeConstraint")
-    uitext_size_constraint.MaxTextSize = 14
-    uitext_size_constraint.Parent = cash
-    
-    local goal = Instance.new("TextLabel")
-    goal.Font = Enum.Font.Gotham
-    goal.Text = "$0"
-    goal.TextColor3 = Color3.new(1, 1, 1)
-    goal.TextScaled = true
-    goal.TextSize = 14
-    goal.TextWrapped = true
-    goal.AnchorPoint = Vector2.new(0.5, 0.5)
-    goal.BackgroundColor3 = Color3.new(1, 1, 1)
-    goal.BackgroundTransparency = 1
-    goal.BorderColor3 = Color3.new(0, 0, 0)
-    goal.BorderSizePixel = 0
-    goal.Position = UDim2.new(0.840549171, 0, 0.720441699, 0)
-    goal.Size = UDim2.new(0.28257212, 0, 0.324918807, 0)
-    goal.Visible = true
-    goal.Name = "Goal"
-    goal.Parent = card
-    
-    local uitext_size_constraint_2 = Instance.new("UITextSizeConstraint")
-    uitext_size_constraint_2.MaxTextSize = 14
-    uitext_size_constraint_2.Parent = goal
-    
-    local cash_to_pickup = Instance.new("TextBox")
-    cash_to_pickup.CursorPosition = -1
-    cash_to_pickup.Font = Enum.Font.Gotham
-    cash_to_pickup.PlaceholderText = "$1,000,000"
-    cash_to_pickup.Text = ""
-    cash_to_pickup.TextColor3 = Color3.new(0.764706, 0.764706, 0.764706)
-    cash_to_pickup.TextSize = 14
-    cash_to_pickup.TextWrapped = true
-    cash_to_pickup.AnchorPoint = Vector2.new(0.5, 0.5)
-    cash_to_pickup.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.0941176)
-    cash_to_pickup.BorderColor3 = Color3.new(0, 0, 0)
-    cash_to_pickup.BorderSizePixel = 0
-    cash_to_pickup.Position = UDim2.new(0.84054935, 0, 0.308000207, 0)
-    cash_to_pickup.Size = UDim2.new(0.282572329, 0, 0.38499999, 0)
-    cash_to_pickup.Visible = true
-    cash_to_pickup.Name = "CashToPickup"
-    cash_to_pickup.Parent = card
-    
-    local uicorner_2 = Instance.new("UICorner")
-    uicorner_2.Parent = cash_to_pickup
-    
-    local uitext_size_constraint_3 = Instance.new("UITextSizeConstraint")
-    uitext_size_constraint_3.MaxTextSize = 14
-    uitext_size_constraint_3.Parent = cash_to_pickup
-    
-    local username = Instance.new("TextLabel")
-    username.Font = Enum.Font.GothamBold
-    username.Text = player_name
-    username.TextColor3 = Color3.new(1, 1, 1)
-    username.TextScaled = true
-    username.TextSize = 14
-    username.TextWrapped = true
-    username.TextXAlignment = Enum.TextXAlignment.Left
-    username.AnchorPoint = Vector2.new(0.5, 0.5)
-    username.BackgroundColor3 = Color3.new(1, 1, 1)
-    username.BackgroundTransparency = 1
-    username.BorderColor3 = Color3.new(0, 0, 0)
-    username.BorderSizePixel = 0
-    username.Position = UDim2.new(0.306140333, 0, 0.306648135, 0)
-    username.Size = UDim2.new(0.271894187, 0, 0.271533161, 0)
-    username.Visible = true
-    username.Name = "Username"
-    username.Parent = card
-    
-    local uitext_size_constraint_4 = Instance.new("UITextSizeConstraint")
-    uitext_size_constraint_4.MaxTextSize = 14
-    uitext_size_constraint_4.Parent = username
-    
-    local remove = Instance.new("TextButton")
-    remove.Font = Enum.Font.GothamBold
-    remove.Text = "REMOVE HISTORY"
-    remove.TextColor3 = Color3.new(1, 0, 0)
-    remove.TextScaled = true
-    remove.TextSize = 14
-    remove.TextWrapped = true
-    remove.AnchorPoint = Vector2.new(0.5, 0.5)
-    remove.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.0941176)
-    remove.BorderColor3 = Color3.new(0, 0, 0)
-    remove.BorderSizePixel = 0
-    remove.Position = UDim2.new(0.590514064, 0, 0.306250215, 0)
-    remove.Size = UDim2.new(0.180077031, 0, 0.388500214, 0)
-    remove.Visible = true
-    remove.Name = "Remove"
-    remove.Parent = card
-    
-    local uicorner_3 = Instance.new("UICorner")
-    uicorner_3.Parent = remove
-    
-    local uitext_size_constraint_5 = Instance.new("UITextSizeConstraint")
-    uitext_size_constraint_5.MaxTextSize = 8
-    uitext_size_constraint_5.Parent = remove
+	local card = Instance.new("Frame")
+	card.AnchorPoint = Vector2.new(0.5, 0.5)
+	card.BackgroundColor3 = Color3.new(0.113725, 0.113725, 0.113725)
+	card.BorderColor3 = Color3.new(0, 0, 0)
+	card.BorderSizePixel = 0
+	card.Position = UDim2.new(0.49999997, 0, 0.053178601, 0)
+	card.Size = UDim2.new(0.99999994, 0, 0.106357202, 0)
+	card.Visible = true
+	card.Name = player.Name
+	card.Parent = history_2
 
-    local remove_history = remove.MouseButton1Down:Connect(function()
-        remove_history:Disconnect()
-        table.remove(loaded_data["HistoryTab"], table.find(loaded_data["HistoryTab"], tostring(Player_ID)))
-        card:Destroy
-    end)
+	local player_icon = Instance.new("ImageLabel")
+	player_icon.Image = player_image
+	player_icon.ImageColor3 = Color3.new(255, 255, 255)
+	player_icon.AnchorPoint = Vector2.new(0.5, 0.5)
+	player_icon.BackgroundColor3 = Color3.new(1, 1, 1)
+	player_icon.BackgroundTransparency = 1
+	player_icon.BorderColor3 = Color3.new(0, 0, 0)
+	player_icon.BorderSizePixel = 0
+	player_icon.Position = UDim2.new(0.0843881518, 0, 0.497655749, 0)
+	player_icon.Size = UDim2.new(0.105989054, 0, 0.626111567, 0)
+	player_icon.Visible = true
+	player_icon.Name = player.UserId
+	player_icon.Parent = card
+
+	local uicorner = Instance.new("UICorner")
+	uicorner.Parent = player_icon
+
+	local uistroke = Instance.new("UIStroke")
+	uistroke.Color = Color3.new(1, 0.341176, 0.341176)
+	uistroke.Thickness = 2
+	uistroke.Parent = player_icon
+
+	local cash = Instance.new("TextLabel")
+	cash.Font = Enum.Font.Gotham
+	cash.Text = player_currency
+	cash.TextColor3 = Color3.new(1, 1, 1)
+	cash.TextScaled = true
+	cash.TextSize = 14
+	cash.TextWrapped = true
+	cash.TextXAlignment = Enum.TextXAlignment.Left
+	cash.AnchorPoint = Vector2.new(0.5, 0.5)
+	cash.BackgroundColor3 = Color3.new(1, 1, 1)
+	cash.BackgroundTransparency = 1
+	cash.BorderColor3 = Color3.new(0, 0, 0)
+	cash.BorderSizePixel = 0
+	cash.Position = UDim2.new(0.306140333, 0, 0.676000834, 0)
+	cash.Size = UDim2.new(0.271894187, 0, 0.271533221, 0)
+	cash.Visible = true
+	cash.Name = "Cash"
+	cash.Parent = card
+
+	local uitext_size_constraint = Instance.new("UITextSizeConstraint")
+	uitext_size_constraint.MaxTextSize = 14
+	uitext_size_constraint.Parent = cash
+
+	local goal = Instance.new("TextLabel")
+	goal.Font = Enum.Font.Gotham
+	goal.Text = "$0"
+	goal.TextColor3 = Color3.new(1, 1, 1)
+	goal.TextScaled = true
+	goal.TextSize = 14
+	goal.TextWrapped = true
+	goal.AnchorPoint = Vector2.new(0.5, 0.5)
+	goal.BackgroundColor3 = Color3.new(1, 1, 1)
+	goal.BackgroundTransparency = 1
+	goal.BorderColor3 = Color3.new(0, 0, 0)
+	goal.BorderSizePixel = 0
+	goal.Position = UDim2.new(0.840549171, 0, 0.720441699, 0)
+	goal.Size = UDim2.new(0.28257212, 0, 0.324918807, 0)
+	goal.Visible = true
+	goal.Name = "Goal"
+	goal.Parent = card
+
+	local uitext_size_constraint_2 = Instance.new("UITextSizeConstraint")
+	uitext_size_constraint_2.MaxTextSize = 14
+	uitext_size_constraint_2.Parent = goal
+
+	local cash_to_pickup = Instance.new("TextBox")
+	cash_to_pickup.CursorPosition = -1
+	cash_to_pickup.Font = Enum.Font.Gotham
+	cash_to_pickup.PlaceholderText = "$1,000,000"
+	cash_to_pickup.Text = ""
+	cash_to_pickup.TextColor3 = Color3.new(0.764706, 0.764706, 0.764706)
+	cash_to_pickup.TextSize = 14
+	cash_to_pickup.TextWrapped = true
+	cash_to_pickup.AnchorPoint = Vector2.new(0.5, 0.5)
+	cash_to_pickup.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.0941176)
+	cash_to_pickup.BorderColor3 = Color3.new(0, 0, 0)
+	cash_to_pickup.BorderSizePixel = 0
+	cash_to_pickup.Position = UDim2.new(0.84054935, 0, 0.308000207, 0)
+	cash_to_pickup.Size = UDim2.new(0.282572329, 0, 0.38499999, 0)
+	cash_to_pickup.Visible = true
+	cash_to_pickup.Name = "CashToPickup"
+	cash_to_pickup.Parent = card
+
+	local uicorner_2 = Instance.new("UICorner")
+	uicorner_2.Parent = cash_to_pickup
+
+	local uitext_size_constraint_3 = Instance.new("UITextSizeConstraint")
+	uitext_size_constraint_3.MaxTextSize = 14
+	uitext_size_constraint_3.Parent = cash_to_pickup
+
+	local username = Instance.new("TextLabel")
+	username.Font = Enum.Font.GothamBold
+	username.Text = player_name
+	username.TextColor3 = Color3.new(1, 1, 1)
+	username.TextScaled = true
+	username.TextSize = 14
+	username.TextWrapped = true
+	username.TextXAlignment = Enum.TextXAlignment.Left
+	username.AnchorPoint = Vector2.new(0.5, 0.5)
+	username.BackgroundColor3 = Color3.new(1, 1, 1)
+	username.BackgroundTransparency = 1
+	username.BorderColor3 = Color3.new(0, 0, 0)
+	username.BorderSizePixel = 0
+	username.Position = UDim2.new(0.306140333, 0, 0.306648135, 0)
+	username.Size = UDim2.new(0.271894187, 0, 0.271533161, 0)
+	username.Visible = true
+	username.Name = "Username"
+	username.Parent = card
+
+	local uitext_size_constraint_4 = Instance.new("UITextSizeConstraint")
+	uitext_size_constraint_4.MaxTextSize = 14
+	uitext_size_constraint_4.Parent = username
+
+	local remove = Instance.new("TextButton")
+	remove.Font = Enum.Font.GothamBold
+	remove.Text = "REMOVE HISTORY"
+	remove.TextColor3 = Color3.new(1, 0, 0)
+	remove.TextScaled = true
+	remove.TextSize = 14
+	remove.TextWrapped = true
+	remove.AnchorPoint = Vector2.new(0.5, 0.5)
+	remove.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.0941176)
+	remove.BorderColor3 = Color3.new(0, 0, 0)
+	remove.BorderSizePixel = 0
+	remove.Position = UDim2.new(0.590514064, 0, 0.306250215, 0)
+	remove.Size = UDim2.new(0.180077031, 0, 0.388500214, 0)
+	remove.Visible = true
+	remove.Name = "Remove"
+	remove.Parent = card
+
+	local uicorner_3 = Instance.new("UICorner")
+	uicorner_3.Parent = remove
+
+	local uitext_size_constraint_5 = Instance.new("UITextSizeConstraint")
+	uitext_size_constraint_5.MaxTextSize = 8
+	uitext_size_constraint_5.Parent = remove
+
+	local remove_history = remove.MouseButton1Down:Connect(function()
+		remove_history:Disconnect()
+		table.remove(loaded_data["HistoryTab"], table.find(loaded_data["HistoryTab"], tostring(Player_ID)))
+		card:Destroy()
+	end)
 end
 
 function selling_gui.add_card(player : player) -- :)
@@ -809,188 +809,188 @@ function selling_gui.add_card(player : player) -- :)
     
     --]]
 
-    local player_id = player.UserId
-    local player_datafolder = player:WaitForChild("DataFolder")
-    local player_currency = player_datafolder:WaitForChild("Currency")
+	local player_id = player.UserId
+	local player_datafolder = player:WaitForChild("DataFolder")
+	local player_currency = player_datafolder:WaitForChild("Currency")
 
     --[[
         
         Card
 
     --]]
-    local card = Instance.new("Frame")
-    card.AnchorPoint = Vector2.new(0.5, 0.5)
-    card.BackgroundColor3 = Color3.new(0.113725, 0.113725, 0.113725)
-    card.BorderColor3 = Color3.new(0, 0, 0)
-    card.BorderSizePixel = 0
-    card.Position = UDim2.new(0.49999997, 0, 0.053178601, 0)
-    card.Size = UDim2.new(0.99999994, 0, 0.106357202, 0)
-    card.Visible = true
-    card.Name = player.Name
-    card.Parent = main_2
-    
-    local player_icon = Instance.new("ImageLabel")
-    player_icon.Image = "https://www.roblox.com/bust-thumbnail/image?userId="..tostring(player_id).."&width=420&height=420&format=png"
-    player_icon.ImageColor3 = Color3.new(255, 255, 255)
-    player_icon.AnchorPoint = Vector2.new(0.5, 0.5)
-    player_icon.BackgroundColor3 = Color3.new(1, 1, 1)
-    player_icon.BackgroundTransparency = 1
-    player_icon.BorderColor3 = Color3.new(0, 0, 0)
-    player_icon.BorderSizePixel = 0
-    player_icon.Position = UDim2.new(0.0843881518, 0, 0.497655749, 0)
-    player_icon.Size = UDim2.new(0.105989054, 0, 0.626111567, 0)
-    player_icon.Visible = true
-    player_icon.Name = player.UserId
-    player_icon.Parent = card
-    
-    local uicorner = Instance.new("UICorner")
-    uicorner.Parent = player_icon
-    
-    local uistroke = Instance.new("UIStroke")
-    uistroke.Color = Color3.new(1, 0.341176, 0.341176)
-    uistroke.Thickness = 2
-    uistroke.Parent = player_icon
-    
-    local cash = Instance.new("TextLabel")
-    cash.Font = Enum.Font.Gotham
-    cash.Text = "$"..format(tostring(player_currency.Value))
-    cash.TextColor3 = Color3.new(1, 1, 1)
-    cash.TextScaled = true
-    cash.TextSize = 14
-    cash.TextWrapped = true
-    cash.TextXAlignment = Enum.TextXAlignment.Left
-    cash.AnchorPoint = Vector2.new(0.5, 0.5)
-    cash.BackgroundColor3 = Color3.new(1, 1, 1)
-    cash.BackgroundTransparency = 1
-    cash.BorderColor3 = Color3.new(0, 0, 0)
-    cash.BorderSizePixel = 0
-    cash.Position = UDim2.new(0.306140333, 0, 0.676000834, 0)
-    cash.Size = UDim2.new(0.271894187, 0, 0.271533221, 0)
-    cash.Visible = true
-    cash.Name = "Cash"
-    cash.Parent = card
-    
-    local uitext_size_constraint = Instance.new("UITextSizeConstraint")
-    uitext_size_constraint.MaxTextSize = 14
-    uitext_size_constraint.Parent = cash
-    
-    local goal = Instance.new("TextLabel")
-    goal.Font = Enum.Font.Gotham
-    goal.Text = "$0"
-    goal.TextColor3 = Color3.new(1, 1, 1)
-    goal.TextScaled = true
-    goal.TextSize = 14
-    goal.TextWrapped = true
-    goal.AnchorPoint = Vector2.new(0.5, 0.5)
-    goal.BackgroundColor3 = Color3.new(1, 1, 1)
-    goal.BackgroundTransparency = 1
-    goal.BorderColor3 = Color3.new(0, 0, 0)
-    goal.BorderSizePixel = 0
-    goal.Position = UDim2.new(0.840549171, 0, 0.720441699, 0)
-    goal.Size = UDim2.new(0.28257212, 0, 0.324918807, 0)
-    goal.Visible = true
-    goal.Name = "Goal"
-    goal.Parent = card
-    
-    local uitext_size_constraint_2 = Instance.new("UITextSizeConstraint")
-    uitext_size_constraint_2.MaxTextSize = 14
-    uitext_size_constraint_2.Parent = goal
-    
-    local cash_to_pickup = Instance.new("TextBox")
-    cash_to_pickup.CursorPosition = -1
-    cash_to_pickup.Font = Enum.Font.Gotham
-    cash_to_pickup.PlaceholderText = "$1,000,000"
-    cash_to_pickup.Text = ""
-    cash_to_pickup.TextColor3 = Color3.new(0.764706, 0.764706, 0.764706)
-    cash_to_pickup.TextSize = 14
-    cash_to_pickup.TextWrapped = true
-    cash_to_pickup.AnchorPoint = Vector2.new(0.5, 0.5)
-    cash_to_pickup.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.0941176)
-    cash_to_pickup.BorderColor3 = Color3.new(0, 0, 0)
-    cash_to_pickup.BorderSizePixel = 0
-    cash_to_pickup.Position = UDim2.new(0.84054935, 0, 0.308000207, 0)
-    cash_to_pickup.Size = UDim2.new(0.282572329, 0, 0.38499999, 0)
-    cash_to_pickup.Visible = true
-    cash_to_pickup.Name = "CashToPickup"
-    cash_to_pickup.Parent = card
-    
-    local uicorner_2 = Instance.new("UICorner")
-    uicorner_2.Parent = cash_to_pickup
-    
-    local uitext_size_constraint_3 = Instance.new("UITextSizeConstraint")
-    uitext_size_constraint_3.MaxTextSize = 14
-    uitext_size_constraint_3.Parent = cash_to_pickup
-    
-    local username = Instance.new("TextLabel")
-    username.Font = Enum.Font.GothamBold
-    username.Text = player.Name.." ("..player.DisplayName..")"
-    username.TextColor3 = Color3.new(1, 1, 1)
-    username.TextScaled = true
-    username.TextSize = 14
-    username.TextWrapped = true
-    username.TextXAlignment = Enum.TextXAlignment.Left
-    username.AnchorPoint = Vector2.new(0.5, 0.5)
-    username.BackgroundColor3 = Color3.new(1, 1, 1)
-    username.BackgroundTransparency = 1
-    username.BorderColor3 = Color3.new(0, 0, 0)
-    username.BorderSizePixel = 0
-    username.Position = UDim2.new(0.306140333, 0, 0.306648135, 0)
-    username.Size = UDim2.new(0.271894187, 0, 0.271533161, 0)
-    username.Visible = true
-    username.Name = "Username"
-    username.Parent = card
-    
-    local uitext_size_constraint_4 = Instance.new("UITextSizeConstraint")
-    uitext_size_constraint_4.MaxTextSize = 14
-    uitext_size_constraint_4.Parent = username
-    
-    local remove = Instance.new("TextButton")
-    remove.Font = Enum.Font.GothamBold
-    remove.Text = "REMOVE CARD"
-    remove.TextColor3 = Color3.new(1, 0, 0)
-    remove.TextScaled = true
-    remove.TextSize = 14
-    remove.TextWrapped = true
-    remove.AnchorPoint = Vector2.new(0.5, 0.5)
-    remove.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.0941176)
-    remove.BorderColor3 = Color3.new(0, 0, 0)
-    remove.BorderSizePixel = 0
-    remove.Position = UDim2.new(0.590514064, 0, 0.306250215, 0)
-    remove.Size = UDim2.new(0.180077031, 0, 0.388500214, 0)
-    remove.Visible = true
-    remove.Name = "Remove"
-    remove.Parent = card
-    
-    local uicorner_3 = Instance.new("UICorner")
-    uicorner_3.Parent = remove
-    
-    local uitext_size_constraint_5 = Instance.new("UITextSizeConstraint")
-    uitext_size_constraint_5.MaxTextSize = 8
-    uitext_size_constraint_5.Parent = remove
-    
-    local teleport = Instance.new("TextButton")
-    teleport.Font = Enum.Font.GothamBold
-    teleport.Text = "TP"
-    teleport.TextColor3 = Color3.new(0.705882, 0.705882, 0.705882)
-    teleport.TextScaled = true
-    teleport.TextSize = 14
-    teleport.TextWrapped = true
-    teleport.AnchorPoint = Vector2.new(0.5, 0.5)
-    teleport.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.0941176)
-    teleport.BorderColor3 = Color3.new(0, 0, 0)
-    teleport.BorderSizePixel = 0
-    teleport.Position = UDim2.new(0.590514064, 0, 0.745211601, 0)
-    teleport.Size = UDim2.new(0.180077031, 0, 0.388500243, 0)
-    teleport.Visible = true
-    teleport.Name = "Teleport"
-    teleport.Parent = card
-    
-    local uicorner_4 = Instance.new("UICorner")
-    uicorner_4.Parent = teleport
-    
-    local uitext_size_constraint_6 = Instance.new("UITextSizeConstraint")
-    uitext_size_constraint_6.MaxTextSize = 8
-    uitext_size_constraint_6.Parent = teleport
+	local card = Instance.new("Frame")
+	card.AnchorPoint = Vector2.new(0.5, 0.5)
+	card.BackgroundColor3 = Color3.new(0.113725, 0.113725, 0.113725)
+	card.BorderColor3 = Color3.new(0, 0, 0)
+	card.BorderSizePixel = 0
+	card.Position = UDim2.new(0.49999997, 0, 0.053178601, 0)
+	card.Size = UDim2.new(0.99999994, 0, 0.106357202, 0)
+	card.Visible = true
+	card.Name = player.Name
+	card.Parent = main_2
+
+	local player_icon = Instance.new("ImageLabel")
+	player_icon.Image = "https://www.roblox.com/bust-thumbnail/image?userId="..tostring(player_id).."&width=420&height=420&format=png"
+	player_icon.ImageColor3 = Color3.new(255, 255, 255)
+	player_icon.AnchorPoint = Vector2.new(0.5, 0.5)
+	player_icon.BackgroundColor3 = Color3.new(1, 1, 1)
+	player_icon.BackgroundTransparency = 1
+	player_icon.BorderColor3 = Color3.new(0, 0, 0)
+	player_icon.BorderSizePixel = 0
+	player_icon.Position = UDim2.new(0.0843881518, 0, 0.497655749, 0)
+	player_icon.Size = UDim2.new(0.105989054, 0, 0.626111567, 0)
+	player_icon.Visible = true
+	player_icon.Name = player.UserId
+	player_icon.Parent = card
+
+	local uicorner = Instance.new("UICorner")
+	uicorner.Parent = player_icon
+
+	local uistroke = Instance.new("UIStroke")
+	uistroke.Color = Color3.new(1, 0.341176, 0.341176)
+	uistroke.Thickness = 2
+	uistroke.Parent = player_icon
+
+	local cash = Instance.new("TextLabel")
+	cash.Font = Enum.Font.Gotham
+	cash.Text = "$"..format(tostring(player_currency.Value))
+	cash.TextColor3 = Color3.new(1, 1, 1)
+	cash.TextScaled = true
+	cash.TextSize = 14
+	cash.TextWrapped = true
+	cash.TextXAlignment = Enum.TextXAlignment.Left
+	cash.AnchorPoint = Vector2.new(0.5, 0.5)
+	cash.BackgroundColor3 = Color3.new(1, 1, 1)
+	cash.BackgroundTransparency = 1
+	cash.BorderColor3 = Color3.new(0, 0, 0)
+	cash.BorderSizePixel = 0
+	cash.Position = UDim2.new(0.306140333, 0, 0.676000834, 0)
+	cash.Size = UDim2.new(0.271894187, 0, 0.271533221, 0)
+	cash.Visible = true
+	cash.Name = "Cash"
+	cash.Parent = card
+
+	local uitext_size_constraint = Instance.new("UITextSizeConstraint")
+	uitext_size_constraint.MaxTextSize = 14
+	uitext_size_constraint.Parent = cash
+
+	local goal = Instance.new("TextLabel")
+	goal.Font = Enum.Font.Gotham
+	goal.Text = "$0"
+	goal.TextColor3 = Color3.new(1, 1, 1)
+	goal.TextScaled = true
+	goal.TextSize = 14
+	goal.TextWrapped = true
+	goal.AnchorPoint = Vector2.new(0.5, 0.5)
+	goal.BackgroundColor3 = Color3.new(1, 1, 1)
+	goal.BackgroundTransparency = 1
+	goal.BorderColor3 = Color3.new(0, 0, 0)
+	goal.BorderSizePixel = 0
+	goal.Position = UDim2.new(0.840549171, 0, 0.720441699, 0)
+	goal.Size = UDim2.new(0.28257212, 0, 0.324918807, 0)
+	goal.Visible = true
+	goal.Name = "Goal"
+	goal.Parent = card
+
+	local uitext_size_constraint_2 = Instance.new("UITextSizeConstraint")
+	uitext_size_constraint_2.MaxTextSize = 14
+	uitext_size_constraint_2.Parent = goal
+
+	local cash_to_pickup = Instance.new("TextBox")
+	cash_to_pickup.CursorPosition = -1
+	cash_to_pickup.Font = Enum.Font.Gotham
+	cash_to_pickup.PlaceholderText = "$1,000,000"
+	cash_to_pickup.Text = ""
+	cash_to_pickup.TextColor3 = Color3.new(0.764706, 0.764706, 0.764706)
+	cash_to_pickup.TextSize = 14
+	cash_to_pickup.TextWrapped = true
+	cash_to_pickup.AnchorPoint = Vector2.new(0.5, 0.5)
+	cash_to_pickup.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.0941176)
+	cash_to_pickup.BorderColor3 = Color3.new(0, 0, 0)
+	cash_to_pickup.BorderSizePixel = 0
+	cash_to_pickup.Position = UDim2.new(0.84054935, 0, 0.308000207, 0)
+	cash_to_pickup.Size = UDim2.new(0.282572329, 0, 0.38499999, 0)
+	cash_to_pickup.Visible = true
+	cash_to_pickup.Name = "CashToPickup"
+	cash_to_pickup.Parent = card
+
+	local uicorner_2 = Instance.new("UICorner")
+	uicorner_2.Parent = cash_to_pickup
+
+	local uitext_size_constraint_3 = Instance.new("UITextSizeConstraint")
+	uitext_size_constraint_3.MaxTextSize = 14
+	uitext_size_constraint_3.Parent = cash_to_pickup
+
+	local username = Instance.new("TextLabel")
+	username.Font = Enum.Font.GothamBold
+	username.Text = player.Name.." ("..player.DisplayName..")"
+	username.TextColor3 = Color3.new(1, 1, 1)
+	username.TextScaled = true
+	username.TextSize = 14
+	username.TextWrapped = true
+	username.TextXAlignment = Enum.TextXAlignment.Left
+	username.AnchorPoint = Vector2.new(0.5, 0.5)
+	username.BackgroundColor3 = Color3.new(1, 1, 1)
+	username.BackgroundTransparency = 1
+	username.BorderColor3 = Color3.new(0, 0, 0)
+	username.BorderSizePixel = 0
+	username.Position = UDim2.new(0.306140333, 0, 0.306648135, 0)
+	username.Size = UDim2.new(0.271894187, 0, 0.271533161, 0)
+	username.Visible = true
+	username.Name = "Username"
+	username.Parent = card
+
+	local uitext_size_constraint_4 = Instance.new("UITextSizeConstraint")
+	uitext_size_constraint_4.MaxTextSize = 14
+	uitext_size_constraint_4.Parent = username
+
+	local remove = Instance.new("TextButton")
+	remove.Font = Enum.Font.GothamBold
+	remove.Text = "REMOVE CARD"
+	remove.TextColor3 = Color3.new(1, 0, 0)
+	remove.TextScaled = true
+	remove.TextSize = 14
+	remove.TextWrapped = true
+	remove.AnchorPoint = Vector2.new(0.5, 0.5)
+	remove.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.0941176)
+	remove.BorderColor3 = Color3.new(0, 0, 0)
+	remove.BorderSizePixel = 0
+	remove.Position = UDim2.new(0.590514064, 0, 0.306250215, 0)
+	remove.Size = UDim2.new(0.180077031, 0, 0.388500214, 0)
+	remove.Visible = true
+	remove.Name = "Remove"
+	remove.Parent = card
+
+	local uicorner_3 = Instance.new("UICorner")
+	uicorner_3.Parent = remove
+
+	local uitext_size_constraint_5 = Instance.new("UITextSizeConstraint")
+	uitext_size_constraint_5.MaxTextSize = 8
+	uitext_size_constraint_5.Parent = remove
+
+	local teleport = Instance.new("TextButton")
+	teleport.Font = Enum.Font.GothamBold
+	teleport.Text = "TP"
+	teleport.TextColor3 = Color3.new(0.705882, 0.705882, 0.705882)
+	teleport.TextScaled = true
+	teleport.TextSize = 14
+	teleport.TextWrapped = true
+	teleport.AnchorPoint = Vector2.new(0.5, 0.5)
+	teleport.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.0941176)
+	teleport.BorderColor3 = Color3.new(0, 0, 0)
+	teleport.BorderSizePixel = 0
+	teleport.Position = UDim2.new(0.590514064, 0, 0.745211601, 0)
+	teleport.Size = UDim2.new(0.180077031, 0, 0.388500243, 0)
+	teleport.Visible = true
+	teleport.Name = "Teleport"
+	teleport.Parent = card
+
+	local uicorner_4 = Instance.new("UICorner")
+	uicorner_4.Parent = teleport
+
+	local uitext_size_constraint_6 = Instance.new("UITextSizeConstraint")
+	uitext_size_constraint_6.MaxTextSize = 8
+	uitext_size_constraint_6.Parent = teleport
 
     --[[
 
@@ -998,81 +998,81 @@ function selling_gui.add_card(player : player) -- :)
 
     --]]
 
-    --> Important
-    local begin_count = false
-    local goal_amount = nil
+	--> Important
+	local begin_count = false
+	local goal_amount = nil
 
-    --> Amount Checking
-    local set_amount = player_currency.Value
-    local amount_checking = player_currency:GetPropertyChangedSignal("Value"):Connect(function()
-        if begin_count then
-            warn("Counting!")
+	--> Amount Checking
+	local set_amount = player_currency.Value
+	local amount_checking = player_currency:GetPropertyChangedSignal("Value"):Connect(function()
+		if begin_count then
+			warn("Counting!")
 
-            if set_amount > player_currency.Value then
-                -- player has spent money
+			if set_amount > player_currency.Value then
+				-- player has spent money
 
-                goal_amount -= set_amount - player_currency.Value
-                set_amount = player_currency.Value
-                goal.Text = "$"..format(goal_amount)
-                warn("Player Has Spent Money!")
-            elseif player_currency.Value > (goal_amount + set_amount) then
-                -- player complete
-                uistroke.Color = Color3.fromRGB(0, 255, 0)
-                warn("Player Has Reached Goal!")
-            end
-        else
-            warn("Hasn't Started Counting!")
-            set_amount = player_currency.Value
-        end
+				goal_amount -= set_amount - player_currency.Value
+				set_amount = player_currency.Value
+				goal.Text = "$"..format(goal_amount)
+				warn("Player Has Spent Money!")
+			elseif player_currency.Value > (goal_amount + set_amount) then
+				-- player complete
+				uistroke.Color = Color3.fromRGB(0, 255, 0)
+				warn("Player Has Reached Goal!")
+			end
+		else
+			warn("Hasn't Started Counting!")
+			set_amount = player_currency.Value
+		end
 
-        -- update cash label
-        cash.Text = "$"..format(tostring(player_currency.Value))
-    end)
+		-- update cash label
+		cash.Text = "$"..format(tostring(player_currency.Value))
+	end)
 
-    --> Input Detection
-    local textbox_checking = cash_to_pickup.FocusLost:Connect(function()
-        -- Amount Has Been Set (Checking)
+	--> Input Detection
+	local textbox_checking = cash_to_pickup.FocusLost:Connect(function()
+		-- Amount Has Been Set (Checking)
 
-        local amount = cash_to_pickup.Text
-        if tonumber(amount) == nil then --> Contains A Shortcut
-            local shortcutted = shortcut(amount)
+		local amount = cash_to_pickup.Text
+		if tonumber(amount) == nil then --> Contains A Shortcut
+			local shortcutted = shortcut(amount)
 
-            if shortcutted then
-                goal_amount = tonumber(shortcutted)
-                cash_to_pickup.Text = "$"..format(tostring(goal_amount))
-                goal.Text = "$"..format(goal_amount)
+			if shortcutted then
+				goal_amount = tonumber(shortcutted)
+				cash_to_pickup.Text = "$"..format(tostring(goal_amount))
+				goal.Text = "$"..format(goal_amount)
 
-                begin_count = true
-            else
-                warn("A Error Has Occured When Setting Shortcut!")
-            end
-        else --> Doesn't Contain Shortcut
-            goal_amount = tonumber(cash_to_pickup.Text)
-            cash_to_pickup.Text = "$"..format(tostring(goal_amount))
-            goal.Text = "$"..format(tostring(goal_amount + set_amount))
-            begin_count = true
+				begin_count = true
+			else
+				warn("A Error Has Occured When Setting Shortcut!")
+			end
+		else --> Doesn't Contain Shortcut
+			goal_amount = tonumber(cash_to_pickup.Text)
+			cash_to_pickup.Text = "$"..format(tostring(goal_amount))
+			goal.Text = "$"..format(tostring(goal_amount + set_amount))
+			begin_count = true
 
-            if not goal_amount then
-                return warn("Failed To Set Goal Amount")
-            end
-        end
-    end)
+			if not goal_amount then
+				return warn("Failed To Set Goal Amount")
+			end
+		end
+	end)
 
-    --> Teleport
-    local teleport_card = teleport.MouseButton1Down:Connect(function()
-        if player.Character then
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = player.Character.HumanoidRootPart.CFrame
-        end
-    end)
+	--> Teleport
+	local teleport_card = teleport.MouseButton1Down:Connect(function()
+		if player.Character then
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = player.Character.HumanoidRootPart.CFrame
+		end
+	end)
 
-    --> Remove Card
-    local remove_card = remove.MouseButton1Down:Connect(function()
-        amount_checking:Disconnect()
-        textbox_checking:Disconnect()
+	--> Remove Card
+	local remove_card = remove.MouseButton1Down:Connect(function()
+		amount_checking:Disconnect()
+		textbox_checking:Disconnect()
 
-        card.Parent = history_2
-        remove:Destroy()
-    end)
+		card.Parent = history_2
+		remove:Destroy()
+	end)
 end
 
 return selling_gui
